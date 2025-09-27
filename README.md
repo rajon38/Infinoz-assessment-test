@@ -1,25 +1,67 @@
-# API Documentation
+/ README.md template
+`# Chatbot Backend API
 
+A secure, production-ready backend system for a chatbot application with user authentication, message handling, and chat history storage.
 
+## 🚀 Features
 
-## Table of Contents
-- [Auth Routes](#auth-routes)
+- **User Authentication**: Register and login with JWT tokens
+- **Chat Functionality**: Send messages and receive dummy bot responses
+- **Chat History**: Store and retrieve conversation history
+- **Security**: Password hashing, JWT authentication, rate limiting
+- **Database**: MongoDB with proper schema design
+- **Deployment Ready**: Configured for cloud deployment
+- **Documentation**: Complete API documentation with examples
 
+## 📋 Prerequisites
 
-## Auth Routes
-- **POST /auth/login**: Login a user
-- **POST /auth/logout**: Logout a user
-- **GET /auth/get-me**: Retrieve the profile of the logged-in user
-- **PUT /auth/change-password**: Change the password of the logged-in user
-- **POST /auth/forgot-password**: Initiate password reset process
-- **POST /auth/reset-password**: Complete password reset process
+- Node.js (v14 or higher)
+- MongoDB (local or MongoDB Atlas)
+- npm or yarn
 
-## User Routes
-- **POST /users**: Create a new user
-- **POST /users/create-admin**: Create a new admin user
-- **GET /users**: Retrieve all users
-- **GET /users/:id**: Retrieve a single user by ID
-- **PUT /users/:id**: Update a user by ID
-- **DELETE /users/:id**: Delete a user by ID
+## 🛠️ Installation & Setup
 
+### Local Development
 
+1. **Clone the repository**
+   \`\`\`bash
+   git clone https://github.com/rajon38/Infinoz-assessment-test.git
+   cd chatbot-backend
+   \`\`\`
+
+2. **Install dependencies**
+   \`\`\`bash
+   npm install
+   \`\`\`
+
+3. . **Environment Setup**
+   \`\`\`bash
+   cp .env.example .env
+   \`\`\`
+   
+   Update the \`.env\` file with your values:
+   \`\`\`
+    DATABASE_URL="mongodb+srv://rajon38:rajon38@smt.czp1e.mongodb.net/chat-bot?retryWrites=true&w=majority"
+    NODE_ENV="development"
+    PORT=5005
+    BCRYPT_SALT_ROUNDS=12
+    JWT_SECRET="YOUR SECRET" 
+    EXPIRES_IN="30d"
+    REFRESH_TOKEN_SECRET="YOUR SECRET"
+    REFRESH_TOKEN_EXPIRES_IN="30d"
+   \`\`\`
+
+4. **Start the development server**
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+5. **Health Check**
+   Visit \`http://localhost:5005`
+
+## 📚 API Documentation
+
+### Base URL
+- **Local**: `http://localhost:3000`
+- **Production**: `https://chat-bot-assessment-test.vercel.app/`
+- **Postman**: `https://documenter.getpostman.com/view/24585156/2sB3QDvt1c`

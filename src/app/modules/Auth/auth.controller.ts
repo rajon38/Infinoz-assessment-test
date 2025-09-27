@@ -39,7 +39,7 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthServices.getMyProfile(userToken as string);
   sendResponse(res, {
     success: true,
-    statusCode: 201,
+    statusCode: 200,
     message: "User profile retrieved successfully",
     data: result,
   });

@@ -17,9 +17,10 @@ const http_status_1 = __importDefault(require("http-status"));
 const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const chat_service_1 = require("./chat.service");
+const pick_1 = __importDefault(require("../../../shared/pick"));
 const createChat = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user.id;
-    const message = req.body;
+    const { message } = req.body;
     const result = yield chat_service_1.chatService.sendChatMessageToBot(message, userId);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.CREATED,
@@ -30,7 +31,8 @@ const createChat = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 }));
 const getChatList = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.userId;
-    const result = yield chat_service_1.chatService.getHistoryFromDb(userId);
+    const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+    const result = yield chat_service_1.chatService.getHistoryFromDb(userId, options);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

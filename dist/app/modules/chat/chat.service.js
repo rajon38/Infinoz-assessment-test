@@ -17,6 +17,7 @@ const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const ApiErrors_1 = __importDefault(require("../../../errors/ApiErrors"));
 const http_status_1 = __importDefault(require("http-status"));
 const chat_interface_1 = require("./chat.interface");
+const paginationHelper_1 = require("../../../helpars/paginationHelper");
 const sendChatMessageToBot = (message, userId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const isExistUser = yield prisma_1.default.users.findUnique({
@@ -46,7 +47,8 @@ const sendChatMessageToBot = (message, userId) => __awaiter(void 0, void 0, void
         throw new ApiErrors_1.default(http_status_1.default.INTERNAL_SERVER_ERROR, "Failed to get response from bot");
     }
 });
-const getHistoryFromDb = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+const getHistoryFromDb = (userId, options) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page, limit, skip, sortBy, sortOrder } = paginationHelper_1.paginationHelper.calculatePagination(options);
     const isExistUser = yield prisma_1.default.users.findUnique({
         where: {
             id: userId,
@@ -59,11 +61,23 @@ const getHistoryFromDb = (userId) => __awaiter(void 0, void 0, void 0, function*
         where: {
             userId: userId,
         },
-        orderBy: {
-            createdAt: 'desc',
+        take: limit,
+        skip: skip,
+        orderBy: sortBy && sortOrder ? { [sortBy]: sortOrder } : { createdAt: "desc" },
+    });
+    const total = yield prisma_1.default.chats.count({
+        where: {
+            userId: userId,
         },
     });
-    return chats;
+    return {
+        meta: {
+            page,
+            limit,
+            total,
+        },
+        data: chats,
+    };
 });
 exports.chatService = {
     sendChatMessageToBot,

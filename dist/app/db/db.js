@@ -40,9 +40,9 @@ const prisma_1 = __importDefault(require("../../shared/prisma"));
 const bcrypt = __importStar(require("bcrypt"));
 const config_1 = __importDefault(require("../../config"));
 const initiateSuperAdmin = () => __awaiter(void 0, void 0, void 0, function* () {
-    const hashedPassword = yield bcrypt.hash('123456789', Number(config_1.default.bcrypt_salt_rounds));
+    const hashedPassword = yield bcrypt.hash('mypassword', Number(config_1.default.bcrypt_salt_rounds));
     const payload = {
-        username: 'admin',
+        username: 'abc',
         passwordHash: hashedPassword,
     };
     const isExistUser = yield prisma_1.default.users.findUnique({

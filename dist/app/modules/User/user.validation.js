@@ -4,7 +4,7 @@ exports.UserValidation = exports.CreateUserValidationSchema = void 0;
 const zod_1 = require("zod");
 const CreateUserValidationSchema = zod_1.z.object({
     //email: z.string().email("Invalid email address").min(1, "Email is required"), // Ensure email is provided and is valid
-    username: zod_1.z.string(),
+    username: zod_1.z.string().trim(),
     password: zod_1.z
         .string()
         .min(8, "Password must be at least 8 characters long")

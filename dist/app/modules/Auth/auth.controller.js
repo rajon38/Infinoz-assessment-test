@@ -47,7 +47,7 @@ const getMyProfile = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     const result = yield auth_service_1.AuthServices.getMyProfile(userToken);
     (0, sendResponse_1.default)(res, {
         success: true,
-        statusCode: 201,
+        statusCode: 200,
         message: "User profile retrieved successfully",
         data: result,
     });
