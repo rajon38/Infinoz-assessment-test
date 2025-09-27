@@ -26,7 +26,7 @@ A secure, production-ready backend system for a chatbot application with user au
 1. **Clone the repository**
    \`\`\`bash
    git clone https://github.com/rajon38/Infinoz-assessment-test.git
-   cd chatbot-backend
+   cd Infinoz-assessment-test
    \`\`\`
 
 2. **Install dependencies**
